@@ -7,7 +7,7 @@ from slowapi.errors import RateLimitExceeded
 from app.database import engine, Base
 from app.config import CORS_ORIGINS
 from app.limiter import limiter
-from app.routers import auth, users, trades, psychology
+from app.routers import auth, trades, psychology
 
 # Automatically create database tables on startup
 Base.metadata.create_all(bind=engine)
@@ -48,7 +48,6 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 # Routers
 app.include_router(auth.router, prefix="/api")
-app.include_router(users.router, prefix="/api")
 app.include_router(trades.router, prefix="/api")
 app.include_router(psychology.router, prefix="/api")
 
