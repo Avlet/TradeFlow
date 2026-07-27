@@ -35,8 +35,7 @@ export default function PsychologyForm() {
     setMsg("");
     try {
       await api.createPsychology({
-        symbol: symbol || null,
-        mindset: [mindset], // <--- Yahan array [] brackets lagane hain
+        mindset: [mindset],
         emotional_state: emotion,
         risk_reward_ratio: rr,
         notes: notes || null,
