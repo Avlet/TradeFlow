@@ -47,9 +47,9 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 # Routers
-app.include_router(auth.router, prefix="/api")
-app.include_router(trades.router, prefix="/api")
-app.include_router(psychology.router, prefix="/api")
+app.include_router(auth.router)
+app.include_router(trades.router)
+app.include_router(psychology.router)
 
 @app.get("/")
 def root():
