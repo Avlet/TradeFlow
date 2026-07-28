@@ -56,17 +56,17 @@ def set_auth_cookie(response: Response, token: str) -> None:
     response.set_cookie(
         key=COOKIE_NAME,
         value=token,
-        httponly=True,               # not readable by JavaScript -> mitigates XSS token theft
-        secure=COOKIE_SECURE,        # HTTPS-only in production
-        samesite=COOKIE_SAMESITE,    # "lax" blocks most cross-site CSRF
+        httponly=True,                 # not readable by JavaScript -> mitigates XSS token theft
+        secure=True,                   # Render HTTPS par hai isliye True hona chahiye
+        samesite="none",               # Vercel aur Render ke alag domains ke liye "none" zaroori hai
         max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         path="/",
-        domain=COOKIE_DOMAIN,
+        domain=None,                   # Cross-domain (Vercel to Render) ke liye domain ko None rakhna safe hota hai
     )
 
 
 def clear_auth_cookie(response: Response) -> None:
-    response.delete_cookie(key=COOKIE_NAME, path="/", domain=COOKIE_DOMAIN)
+    response.delete_cookie(key=COOKIE_NAME, path="/", domain=None)
 
 
 def get_current_user(
